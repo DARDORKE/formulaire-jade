@@ -1,0 +1,10 @@
+<div *ngIf="currentQuestion">
+  <h1>{{ currentQuestion.questionText }}</h1>
+  <div class="flex flex-column gap-3">
+    <div *ngFor="let option of currentQuestion.options" class="field-checkbox">
+      <p-radioButton [inputId]="option.answerText" name="category" [value]="option" [(ngModel)]="selectedOption"></p-radioButton>
+      <label [for]="option.answerText" class="ml-2">{{ option.answerText }}</label>
+    </div>
+  </div>
+  <button (click)="onSelectOption()">Submit</button>
+</div>
