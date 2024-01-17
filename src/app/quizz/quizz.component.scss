@@ -1,12 +1,21 @@
+.question, .questionNumber {
+  font-size: 3em;
+  text-align: center;
+}
+
 .question {
   font-weight: 400;
-  font-size: 3em;
+}
+
+.questionNumber {
+  font-weight: 600;
 }
 
 .answer {
   margin-left: 0.5em;
   font-size: 1.5em;
   font-weight: 200;
+  text-align: center;
 }
 
 .row {

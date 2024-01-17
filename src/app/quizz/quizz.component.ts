@@ -38,20 +38,26 @@ export class QuizzComponent implements OnInit{
   selectedOption: any;  // Ajouté pour gérer l'option sélectionnée
   questionHistory: { questionId: number, selectedOption: any }[] = [];
   currentQuestionVisible = true;
+  currentQuestionNumber: number = 1;
 
   constructor(private quizService: QuizService) {}
 
   ngOnInit() {
-    this.loadQuestion(this.currentQuestionId);
+    this.currentQuestion = this.quizService.getQuestion(this.currentQuestionId);
   }
 
-  loadQuestion(id: number) {
+  loadQuestion(id: number, addQuestionNumber: string) {
     this.currentQuestionVisible = false; // Cachez la question actuelle
 
     setTimeout(() => {
       this.currentQuestion = this.quizService.getQuestion(id);
       this.selectedOption = null; // Réinitialiser l'option sélectionnée
       this.currentQuestionVisible = true; // Affichez la nouvelle question
+      if (addQuestionNumber === 'next') {
+        this.currentQuestionNumber++;
+      } else if(addQuestionNumber === 'previous') {
+        this.currentQuestionNumber--;
+      }
     }, 500); // Le délai devrait correspondre à la durée de l'animation
   }
 
@@ -61,7 +67,7 @@ export class QuizzComponent implements OnInit{
 
       console.log(this.questionHistory);
       this.currentQuestionId = this.selectedOption.nextQuestionId;
-      this.loadQuestion(this.currentQuestionId);
+      this.loadQuestion(this.currentQuestionId, 'next');
     }
   }
 
@@ -71,7 +77,7 @@ export class QuizzComponent implements OnInit{
       console.log(this.questionHistory);
       this.currentQuestionId = previous ? previous.questionId : 0;
       this.selectedOption = previous?.selectedOption;
-      this.loadQuestion(this.currentQuestionId);
+      this.loadQuestion(this.currentQuestionId, 'previous');
     }
   }
 

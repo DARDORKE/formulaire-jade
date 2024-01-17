@@ -1,6 +1,11 @@
 <div class="container-fluid" [@questionAnimation]="currentQuestionVisible ? 'enter' : 'leave'">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 d-flex justify-content-around">
+      <div class="questionNumber">Question {{ currentQuestionNumber }} :</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 d-flex justify-content-around">
       <div class="question">{{ currentQuestion?.questionText }}</div>
     </div>
   </div>
@@ -17,7 +22,7 @@
   </div>
   <div class="row">
     <div class="col-12 d-flex justify-content-around">
-      <p-button *ngIf="questionHistory.length > 0" (click)="goToPreviousQuestion()" label="Précédente" [text]="true"
+      <p-button *ngIf="currentQuestionNumber > 1" (click)="goToPreviousQuestion()" label="Précédente" [text]="true"
                 [plain]="true" icon="fa-solid fa-arrow-left"></p-button>
       <p-button (click)="onSelectOption()" [disabled]="!selectedOption" label="Suivante" [text]="true" [plain]="true"
                 icon="fa-solid fa-arrow-right" iconPos="right"></p-button>
