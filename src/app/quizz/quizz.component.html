@@ -1,10 +1,26 @@
-<div *ngIf="currentQuestion">
-  <h1>{{ currentQuestion.questionText }}</h1>
-  <div class="flex flex-column gap-3">
-    <div *ngFor="let option of currentQuestion.options" class="field-checkbox">
-      <p-radioButton [inputId]="option.answerText" name="category" [value]="option" [(ngModel)]="selectedOption"></p-radioButton>
-      <label [for]="option.answerText" class="ml-2">{{ option.answerText }}</label>
+<div class="container-fluid" [@questionAnimation]="currentQuestionVisible ? 'enter' : 'leave'">
+  <div class="row">
+    <div class="col-12">
+      <div class="question">{{ currentQuestion?.questionText }}</div>
     </div>
   </div>
-  <button (click)="onSelectOption()">Submit</button>
+  <div class="row">
+    <div class="col-12 d-flex justify-content-around">
+      <div class="flex flex-column gap-3">
+        <div *ngFor="let option of currentQuestion?.options" class="field-checkbox pb-4 d-flex">
+          <p-radioButton [inputId]="option.answerText" name="category" [value]="option"
+                         [(ngModel)]="selectedOption"></p-radioButton>
+          <label [for]="option.answerText" class="ml-2 answer">{{ option.answerText }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 d-flex justify-content-around">
+      <p-button *ngIf="questionHistory.length > 0" (click)="goToPreviousQuestion()" label="Précédente" [text]="true"
+                [plain]="true" icon="fa-solid fa-arrow-left"></p-button>
+      <p-button (click)="onSelectOption()" [disabled]="!selectedOption" label="Suivante" [text]="true" [plain]="true"
+                icon="fa-solid fa-arrow-right" iconPos="right"></p-button>
+    </div>
+  </div>
 </div>
