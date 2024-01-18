@@ -42,6 +42,7 @@ export class QuizzComponent implements OnInit{
   showQuestions = true;
   showResults = false;
   isAnimating = false;
+  isCalculatingResult = false;
   constructor(private quizService: QuizService) {}
 
   ngOnInit() {
@@ -89,15 +90,20 @@ export class QuizzComponent implements OnInit{
     this.questionHistory.forEach(question => {
       result.push(question.selectedOption.id);
     });
+    this.isCalculatingResult = true;
     this.animationState = 'leave';
   }
 
+  areAllQuestionsAnswered() {
+    return this.questionHistory.length === this.numberOfQuestions;
+  }
+
   onAnimationDone() {
-    if (this.animationState === 'leave') {
+    if (this.animationState === 'leave' && this.isCalculatingResult) {
       this.showQuestions = false;
       this.showResults = true;
       this.animationState = 'enter'; // Préparez l'état pour la prochaine animation
-      this.isAnimating = false; // Désactiver l'animation lorsque l'animation est terminée
+      this.isCalculatingResult = false; // Réinitialiser la condition de calcul des résultats
     }
   }
 }
