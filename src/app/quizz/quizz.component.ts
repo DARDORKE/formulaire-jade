@@ -28,9 +28,8 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
       transition('* => leave', [
         animate('0.5s ease-in', style({ opacity: 0, transform: 'translateX(-100%)' }))
       ])
-    ])
-  ]
-
+    ]),
+  ],
 })
 export class QuizzComponent implements OnInit{
   numberOfQuestions = 0;
@@ -38,9 +37,11 @@ export class QuizzComponent implements OnInit{
   currentQuestion: any;
   selectedOption: any;  // Ajouté pour gérer l'option sélectionnée
   questionHistory: { questionId: number, selectedOption: any }[] = [];
-  currentQuestionVisible = true;
   currentQuestionNumber: number = 1;
-
+  animationState: 'enter' | 'leave' = 'enter';
+  showQuestions = true;
+  showResults = false;
+  isAnimating = false;
   constructor(private quizService: QuizService) {}
 
   ngOnInit() {
@@ -49,17 +50,19 @@ export class QuizzComponent implements OnInit{
   }
 
   loadQuestion(id: number, addQuestionNumber: string) {
-    this.currentQuestionVisible = false; // Cachez la question actuelle
+    this.isAnimating = true; // Activer l'animation
+    this.animationState = 'leave'; // Commencez par quitter l'animation pour la question actuelle
 
     setTimeout(() => {
       this.currentQuestion = this.quizService.getQuestion(id);
       this.selectedOption = null; // Réinitialiser l'option sélectionnée
-      this.currentQuestionVisible = true; // Affichez la nouvelle question
+      this.animationState = 'enter'; // Déclenchez l'animation d'entrée pour la nouvelle question
       if (addQuestionNumber === 'next') {
         this.currentQuestionNumber++;
       } else if(addQuestionNumber === 'previous') {
         this.currentQuestionNumber--;
       }
+      this.isAnimating = false; // Désactiver l'animation une fois terminée
     }, 500); // Le délai devrait correspondre à la durée de l'animation
   }
 
@@ -86,6 +89,15 @@ export class QuizzComponent implements OnInit{
     this.questionHistory.forEach(question => {
       result.push(question.selectedOption.id);
     });
-    console.log(result);
+    this.animationState = 'leave';
+  }
+
+  onAnimationDone() {
+    if (this.animationState === 'leave') {
+      this.showQuestions = false;
+      this.showResults = true;
+      this.animationState = 'enter'; // Préparez l'état pour la prochaine animation
+      this.isAnimating = false; // Désactiver l'animation lorsque l'animation est terminée
+    }
   }
 }

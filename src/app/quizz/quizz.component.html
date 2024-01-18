@@ -1,33 +1,46 @@
-<div class="container-fluid" [@questionAnimation]="currentQuestionVisible ? 'enter' : 'leave'">
-  <div class="row">
-    <div class="col-12 d-flex justify-content-around">
-      <div class="questionNumber">Question {{ currentQuestionNumber }} :</div>
+<div class="container-fluid">
+  <div *ngIf="showQuestions" [@questionAnimation]="animationState" (@questionAnimation.done)="onAnimationDone()">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-around">
+        <div class="questionNumber">Question {{ currentQuestionNumber }} :</div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-12 d-flex justify-content-around">
-      <div class="question">{{ currentQuestion?.questionText }}</div>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-around">
+        <div class="question">{{ currentQuestion?.questionText }}</div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-12 d-flex justify-content-around">
-      <div class="flex flex-column gap-3">
-        <div *ngFor="let option of currentQuestion?.options" class="field-checkbox pb-4 d-flex">
-          <p-radioButton [inputId]="option.answerText" name="category" [value]="option"
-                         [(ngModel)]="selectedOption"></p-radioButton>
-          <label [for]="option.answerText" class="ml-2 answer">{{ option.answerText }}</label>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-around">
+        <div class="flex flex-column gap-3">
+          <div *ngFor="let option of currentQuestion?.options" class="field-checkbox pb-4 d-flex">
+            <p-radioButton [inputId]="option.answerText" name="category" [value]="option"
+                           [(ngModel)]="selectedOption"></p-radioButton>
+            <label [for]="option.answerText" class="ml-2 answer">{{ option.answerText }}</label>
+          </div>
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-around">
+        <p-button *ngIf="currentQuestionNumber > 1" (click)="goToPreviousQuestion()" label="Précédente"
+                  [disabled]="isAnimating" [text]="true" [plain]="true" icon="fa-solid fa-arrow-left"></p-button>
+        <p-button *ngIf="currentQuestionNumber < numberOfQuestions" (click)="onSelectOption()"
+                  [disabled]="!selectedOption || isAnimating" label="Suivante" [text]="true" [plain]="true"
+                  icon="fa-solid fa-arrow-right" iconPos="right"></p-button>
+        <p-button
+          *ngIf="(currentQuestionNumber === numberOfQuestions) && (numberOfQuestions !== questionHistory.length)"
+          (click)="calculateFinalOutcome()" [disabled]="!selectedOption || isAnimating" label="Valider" [text]="true"
+          [plain]="true" icon="fa-solid fa-check" iconPos="right"></p-button>
+
+      </div>
+    </div>
   </div>
-  <div class="row">
-    <div class="col-12 d-flex justify-content-around">
-      <p-button *ngIf="currentQuestionNumber > 1" (click)="goToPreviousQuestion()" label="Précédente" [text]="true"
-                [plain]="true" icon="fa-solid fa-arrow-left"></p-button>
-      <p-button *ngIf="currentQuestionNumber < numberOfQuestions" (click)="onSelectOption()" [disabled]="!selectedOption" label="Suivante" [text]="true" [plain]="true"
-                icon="fa-solid fa-arrow-right" iconPos="right"></p-button>
-      <p-button *ngIf="(currentQuestionNumber === numberOfQuestions) && (numberOfQuestions !== questionHistory.length)" (click)="calculateFinalOutcome()" [disabled]="!selectedOption" label="Valider" [text]="true" [plain]="true"
-                icon="fa-solid fa-check" iconPos="right"></p-button>
+  <div *ngIf="showResults" [@questionAnimation]="'enter'">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-around">
+        <div class="questionNumber">Résultat</div>
+      </div>
     </div>
   </div>
 </div>
