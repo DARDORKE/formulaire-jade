@@ -24,8 +24,10 @@
     <div class="col-12 d-flex justify-content-around">
       <p-button *ngIf="currentQuestionNumber > 1" (click)="goToPreviousQuestion()" label="Précédente" [text]="true"
                 [plain]="true" icon="fa-solid fa-arrow-left"></p-button>
-      <p-button (click)="onSelectOption()" [disabled]="!selectedOption" label="Suivante" [text]="true" [plain]="true"
+      <p-button *ngIf="currentQuestionNumber < numberOfQuestions" (click)="onSelectOption()" [disabled]="!selectedOption" label="Suivante" [text]="true" [plain]="true"
                 icon="fa-solid fa-arrow-right" iconPos="right"></p-button>
+      <p-button *ngIf="(currentQuestionNumber === numberOfQuestions) && (numberOfQuestions !== questionHistory.length)" (click)="calculateFinalOutcome()" [disabled]="!selectedOption" label="Valider" [text]="true" [plain]="true"
+                icon="fa-solid fa-check" iconPos="right"></p-button>
     </div>
   </div>
 </div>

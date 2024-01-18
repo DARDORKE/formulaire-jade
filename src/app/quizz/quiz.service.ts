@@ -4,42 +4,42 @@ import {Injectable} from "@angular/core";
   providedIn: 'root'
 })
 export class QuizService {
-  private history: { questionId: number, selectedOption: any }[] = [];
   private questions = [
     {
       id: 1,
-      questionText: "De quelle couleur est la mer ?",
+      questionText: "Pour votre séjour en baie de Somme, vous venez en mode :",
       options: [
-        {answerText: "Réponse A1", nextQuestionId: 2},
-        {answerText: "Réponse A2", nextQuestionId: 2},]
+        {id: 1, answerText: "Explorateur culturel", nextQuestionId: 2},
+        {id: 2, answerText: "Slow life", nextQuestionId: 2},
+        {id: 3, answerText: "Sportif de compet’", nextQuestionId: 2},
+      ]
     },
     {
       id: 2,
-      questionText: "Comment sont vont les vaches ?",
+      questionText: "Vous passerez vos vacances :",
       options: [
-        {answerText: "Réponse B1", nextQuestionId: 1},
-        {answerText: "Réponse B2", nextQuestionId: 1},]
+        {id: 1, answerText: "Entre amis", nextQuestionId: 3},
+        {id: 2, answerText: "En famille", nextQuestionId: 3},
+        {id: 3, answerText: "Avec votre amoureux/euse", nextQuestionId: 3},
+      ]
+    },
+    {
+      id: 3,
+      questionText: "Pendant votre séjour vous préférez :",
+      options: [
+        {id: 1, answerText: "Être en pleine nature, la pluie ne vous fait pas peur", nextQuestionId: 4},
+        {id: 2, answerText: "Être dans un milieu urbain, visiter des musées", nextQuestionId: 4},
+        {id: 3, answerText: "Remonter le temps, découvrir le passé…", nextQuestionId: 4},
+      ]
     },
     // autres questions...
   ];
 
-  addResponse(questionId: number, selectedOption: any) {
-    this.history.push({ questionId, selectedOption });
-  }
-
-  getPreviousQuestion() {
-    if (this.history.length > 1) {
-      this.history.pop(); // Enlève la question actuelle
-      return this.history[this.history.length - 1]; // Retourne la question précédente
-    }
-    return null;
-  }
-
-  getHistory() {
-    return this.history;
-  }
-
   getQuestion(id: number) {
     return this.questions.find(question => question.id === id);
+  }
+
+  getNumberOfQuestions(): number {
+    return this.questions.length;
   }
 }

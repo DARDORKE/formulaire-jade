@@ -33,6 +33,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 
 })
 export class QuizzComponent implements OnInit{
+  numberOfQuestions = 0;
   currentQuestionId = 1;
   currentQuestion: any;
   selectedOption: any;  // Ajouté pour gérer l'option sélectionnée
@@ -44,6 +45,7 @@ export class QuizzComponent implements OnInit{
 
   ngOnInit() {
     this.currentQuestion = this.quizService.getQuestion(this.currentQuestionId);
+    this.numberOfQuestions = this.quizService.getNumberOfQuestions();
   }
 
   loadQuestion(id: number, addQuestionNumber: string) {
@@ -64,8 +66,6 @@ export class QuizzComponent implements OnInit{
   onSelectOption() {
     if (this.selectedOption) {
       this.questionHistory.push({ questionId: this.currentQuestionId, selectedOption: this.selectedOption });
-
-      console.log(this.questionHistory);
       this.currentQuestionId = this.selectedOption.nextQuestionId;
       this.loadQuestion(this.currentQuestionId, 'next');
     }
@@ -74,7 +74,6 @@ export class QuizzComponent implements OnInit{
   goToPreviousQuestion() {
     if (this.questionHistory.length > 0) {
       const previous = this.questionHistory.pop(); // Retirer et obtenir la question précédente
-      console.log(this.questionHistory);
       this.currentQuestionId = previous ? previous.questionId : 0;
       this.selectedOption = previous?.selectedOption;
       this.loadQuestion(this.currentQuestionId, 'previous');
@@ -82,7 +81,11 @@ export class QuizzComponent implements OnInit{
   }
 
   calculateFinalOutcome() {
-    // Implémentez votre logique ici pour analyser les réponses
-    // et fournir une conclusion ou une évaluation basée sur les choix de l'utilisateur.
+    const result: any[] = [];
+    this.questionHistory.push({ questionId: this.currentQuestionId, selectedOption: this.selectedOption });
+    this.questionHistory.forEach(question => {
+      result.push(question.selectedOption.id);
+    });
+    console.log(result);
   }
 }
