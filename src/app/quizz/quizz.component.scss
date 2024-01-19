@@ -23,40 +23,41 @@
   padding-top: 35px;
 }
 
-/* Styles pour les résultats */
 .results-container {
-  text-align: center;
+  background-color: #ffffff;
   padding: 20px;
-}
-
-.result-item {
-  background-color: #f2f2f2;
-  border-radius: 10px;
-  margin: 10px 0;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-}
-
-.result-title {
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #333;
-}
-
-.result-description {
-  font-size: 1em;
-  color: #666;
+  border-radius: 20px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  margin: 25px;
+  text-align: center;
 }
 
 .results-header {
   font-size: 1.8em;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.result-item {
+  background-color: #f8f8f8;
+  border-left: 4px solid #777; // Ajoute une bordure sur le côté pour le dynamisme
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 15px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    transform: scale(1.03); // Un léger effet de zoom au survol
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.result-description {
+  font-size: 1em;
+  line-height: 1.4;
+  color: #333;
+  text-align: left;
 }
