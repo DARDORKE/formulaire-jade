@@ -36,11 +36,10 @@
       </div>
     </div>
   </div>
-  <div *ngIf="showResults" [@questionAnimation]="'enter'">
-    <div class="row">
-      <div class="col-12 d-flex justify-content-around">
-        <div class="questionNumber">Résultat</div>
-      </div>
+  <div *ngIf="showResults" [@resultAnimation]="'enter'" class="results-container">
+    <div class="results-header">Voici quelques idées d'activités qui pourraient vous intéresser :</div>
+    <div class="result-item" *ngFor="let activity of activities">
+      <div class="result-description">{{ activity }}</div>
     </div>
   </div>
 </div>

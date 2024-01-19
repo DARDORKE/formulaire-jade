@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {QuizService} from "./quiz.service";
+import {QuizService} from "./Services/quiz.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {RadioButtonModule} from "primeng/radiobutton";
 import {FormsModule} from "@angular/forms";
 import {ButtonModule} from "primeng/button";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {QuizResultService} from "./Services/quiz-result.service";
 @Component({
   selector: 'app-quizz',
   standalone: true,
@@ -29,6 +30,13 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
         animate('0.5s ease-in', style({ opacity: 0, transform: 'translateX(-100%)' }))
       ])
     ]),
+    trigger('resultAnimation', [
+      state('enter', style({ transform: 'translateY(0)' })),
+      transition(':enter', [
+        style({ transform: 'translateY(100%)' }), // Démarre du bas de la page
+        animate('3s ease-out') // Durée de l'animation
+      ]),
+    ]),
   ],
 })
 export class QuizzComponent implements OnInit{
@@ -43,7 +51,8 @@ export class QuizzComponent implements OnInit{
   showResults = false;
   isAnimating = false;
   isCalculatingResult = false;
-  constructor(private quizService: QuizService) {}
+  activities: string[] = [];
+  constructor(private quizService: QuizService, private quizResultService: QuizResultService) {}
 
   ngOnInit() {
     this.currentQuestion = this.quizService.getQuestion(this.currentQuestionId);
@@ -85,13 +94,21 @@ export class QuizzComponent implements OnInit{
   }
 
   calculateFinalOutcome() {
-    const result: any[] = [];
     this.questionHistory.push({ questionId: this.currentQuestionId, selectedOption: this.selectedOption });
-    this.questionHistory.forEach(question => {
-      result.push(question.selectedOption.id);
-    });
+    const resultKey = this.questionHistory.map(q => q.selectedOption.id).join('.');
+    this.activities = this.quizResultService.getResult(resultKey);
     this.isCalculatingResult = true;
     this.animationState = 'leave';
+
+    // Attendez que l'animation soit terminée avant d'afficher les résultats
+    setTimeout(() => {
+      const resultKey = this.questionHistory.map(q => q.selectedOption.id).join('.');
+      this.activities = this.quizResultService.getResult(resultKey);
+
+      this.showQuestions = false;  // Cachez les questions
+      this.showResults = true;     // Affichez les résultats
+      this.animationState = 'enter'; // Déclenchez l'animation d'entrée pour les résultats
+    }, 500); // Assurez-vous que ce délai correspond à la durée de votre animation
   }
 
   areAllQuestionsAnswered() {
