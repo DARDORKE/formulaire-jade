@@ -123,4 +123,15 @@ export class QuizzComponent implements OnInit{
       this.isCalculatingResult = false; // Réinitialiser la condition de calcul des résultats
     }
   }
+  resetQuiz() {
+    this.showResults = false;
+    this.currentQuestionId = 1;
+    this.currentQuestion = this.quizService.getQuestion(this.currentQuestionId);
+    this.currentQuestionNumber = 1;
+    this.questionHistory = [];
+    this.selectedOption = null;
+    this.showQuestions = true;
+    this.animationState = 'enter';
+    this.isCalculatingResult = false; // Assurez-vous de réinitialiser ce flag
+  }
 }

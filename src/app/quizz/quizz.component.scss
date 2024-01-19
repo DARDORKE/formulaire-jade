@@ -61,3 +61,22 @@
   color: #333;
   text-align: left;
 }
+
+.reset-button {
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: transparent; // Fond transparent
+  color: #777; // Couleur de texte gris foncé
+  border: 2px solid #777; // Bordure grise
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+
+  &:hover {
+    color: white; // Texte blanc au survol
+    background-color: #777; // Fond gris foncé au survol
+    border-color: #777; // Maintenir la même couleur de bordure
+  }
+}
+
