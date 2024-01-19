@@ -32,6 +32,8 @@
   max-width: 600px;
   margin: 25px;
   text-align: center;
+  max-height: 95vh; // Hauteur maximale à 80% de la hauteur de la fenêtre
+  overflow-y: auto;
 }
 
 .results-header {
