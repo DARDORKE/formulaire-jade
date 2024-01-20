@@ -9,6 +9,7 @@
 }
 
 .questionNumber {
+  color: #d4300f;
   font-size: 3.5em;
   font-weight: 600;
 }
@@ -44,7 +45,7 @@
 .results-header {
   font-size: 1.5em;
   font-weight: 600;
-  color: #222c3d; // Couleur du texte
+  color: #2c3646;
   margin-bottom: 30px;
   text-align: center;
 }
@@ -58,6 +59,7 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
+  border-left: 5px solid #d4300f;
 
   &:hover {
     transform: scale(1.03);
@@ -66,8 +68,8 @@
 
 .result-title {
   user-select: none;
-  font-size: 1.4em;
-  font-weight: 400;
+  font-size: 1em;
+  font-weight: 500;
   margin-bottom: 10px;
   color: #222c3d; // Couleur du texte
 }
@@ -83,11 +85,11 @@
   line-height: 1.6;
   margin-top: 10px;
   font-weight: 100;
+  font-style: italic;
 }
 
 .result-item a {
   padding: 8px 15px;
-  background-color: #000000; // Couleur de fond du bouton
   color: white; // Couleur du texte
   border: none;
   border-radius: 4px;
@@ -95,6 +97,7 @@
   font-size: 1em;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+  background-color: #d4300f;
 
   &:hover {
     background-color: darken(#000000, 10%); // Assombrir la couleur au survol
@@ -105,20 +108,48 @@
   padding: 10px 20px;
   margin-top: 30px;
   background-color: transparent;
-  color: #000000; // Couleur du texte
-  border: 2px solid #000000; // Couleur des contours
   border-radius: 5px;
   font-size: 1em;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  color: #d4300f; // Couleur du texte du bouton
+  border: 2px solid #d4300f; // Couleur des contours du bouton
 
   &:hover {
-    background-color: #000000;
+    background-color: #d4300f;
     color: white;
   }
 }
 
-.p-radiobutton .p-radiobutton-box.p-highlight {
-  border-color: #000000;
-  background: #000000;
+.question, .questionNumber, .answer, .result-title, .result-item p {
+  color: #777; // Couleur de texte générale
+}
+
+:host ::ng-deep .p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
+  border-color: #d4300f !important;
+  background: #d4300f !important;
+}
+
+:host ::ng-deep .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
+  box-shadow: 0 0 0 0.2rem rgba(252, 88, 60, 0.76) !important;
+  border-color: #d4300f !important;
+}
+
+:host ::ng-deep .p-radiobutton .p-radiobutton-box.p-highlight {
+  border-color: #d4300f !important;
+  background: #d4300f !important;
+}
+
+:host ::ng-deep .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
+  border-color: #dc3545 !important;
+  background: #dc3545 !important;
+  color: #ffffff !important;
+}
+
+:host ::ng-deep .p-input-filled .p-radiobutton .p-radiobutton-box.p-highlight {
+  background: #d4300f !important;
+}
+
+:host ::ng-deep .p-input-filled .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
+  background: #d4300f !important;
 }
