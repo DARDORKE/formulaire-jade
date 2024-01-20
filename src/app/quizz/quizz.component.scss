@@ -57,16 +57,12 @@
   margin-bottom: 15px;
   padding: 15px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  transition: background-color 0.5s ease-in;
+  transition: transform 0.3s ease-in;
   cursor: pointer;
-  border-left: 5px solid #d4300f;
+  border-left: 3px solid #d4300f;
 
   &:hover {
     transform: scale(1.03);
-  }
-
-  &.active {
-    background-color: #eee7d8; // Nouvelle couleur de fond lors du survol ou de l'activation
   }
 }
 
