@@ -57,21 +57,33 @@
   margin-bottom: 15px;
   padding: 15px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease-in-out;
+  transition: background-color 0.5s ease-in;
   cursor: pointer;
   border-left: 5px solid #d4300f;
 
   &:hover {
     transform: scale(1.03);
   }
+
+  &.active {
+    background-color: #eee7d8; // Nouvelle couleur de fond lors du survol ou de l'activation
+  }
 }
 
 .result-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
   user-select: none;
   font-size: 1em;
   font-weight: 500;
   margin-bottom: 10px;
   color: #222c3d; // Couleur du texte
+
+  .fa {
+    margin-left: 10px;
+  }
 }
 
 .result-item img {
@@ -123,6 +135,10 @@
 
 .question, .questionNumber, .answer, .result-title, .result-item p {
   color: #777; // Couleur de texte générale
+}
+
+:host ::ng-deep .p-button:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #d4300f, 0 1px 2px 0 rgb(0, 0, 0);
 }
 
 :host ::ng-deep .p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {

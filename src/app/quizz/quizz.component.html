@@ -38,8 +38,11 @@
   </div>
   <div *ngIf="showResults" [@resultAnimation]="'enter'" class="results-container">
     <div class="results-header">Voici quelques idées d'activités qui pourraient vous intéresser :</div>
-    <div class="result-item" *ngFor="let activity of activities">
-      <div (click)="toggleDetails(activity)" class="result-title">{{ activity.title }}</div>
+    <div (click)="toggleDetails(activity)" class="result-item" *ngFor="let activity of activities" [class.active]="activity.showDetails">
+      <div class="result-title">
+        {{ activity.title }}
+        <i class="fa" [class.fa-chevron-right]="!activity.showDetails" [class.fa-chevron-down]="activity.showDetails"></i>
+      </div>
       <div *ngIf="activity.showDetails">
         <img [src]="activity.image" alt="{{ activity.title }}">
         <p>{{ activity.description }}</p>
