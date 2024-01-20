@@ -24,6 +24,7 @@
 }
 
 .results-container {
+  user-select: none;
   background-color: #ffffff;
   padding: 20px;
   border-radius: 20px;
@@ -60,7 +61,6 @@
 }
 
 .result-description {
-  user-select: none;
   font-size: 1em;
   line-height: 1.4;
   color: #333;
