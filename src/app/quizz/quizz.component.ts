@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {QuizService} from "./Services/quiz.service";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {RadioButtonModule} from "primeng/radiobutton";
 import {FormsModule} from "@angular/forms";
 import {ButtonModule} from "primeng/button";
@@ -14,7 +14,8 @@ import {QuizResultService} from "./Services/quiz-result.service";
     NgForOf,
     RadioButtonModule,
     FormsModule,
-    ButtonModule
+    ButtonModule,
+    NgOptimizedImage
   ],
   templateUrl: './quizz.component.html',
   styleUrl: './quizz.component.scss',
@@ -51,7 +52,7 @@ export class QuizzComponent implements OnInit{
   showResults = false;
   isAnimating = false;
   isCalculatingResult = false;
-  activities: string[] = [];
+  activities: any[] = [];
   constructor(private quizService: QuizService, private quizResultService: QuizResultService) {}
 
   ngOnInit() {
@@ -94,25 +95,31 @@ export class QuizzComponent implements OnInit{
   }
 
   calculateFinalOutcome() {
+    // Ajout de la dernière sélection à l'historique
     this.questionHistory.push({ questionId: this.currentQuestionId, selectedOption: this.selectedOption });
+
+    // Calcul de la clé de résultat basée sur l'historique des réponses
     const resultKey = this.questionHistory.map(q => q.selectedOption.id).join('.');
-    this.activities = this.quizResultService.getResult(resultKey);
+
+    // Début de l'animation de sortie
     this.isCalculatingResult = true;
     this.animationState = 'leave';
 
-    // Attendez que l'animation soit terminée avant d'afficher les résultats
+    // Attente de la fin de l'animation avant d'afficher les résultats
     setTimeout(() => {
-      const resultKey = this.questionHistory.map(q => q.selectedOption.id).join('.');
+      // Récupération des résultats basés sur la clé calculée
       this.activities = this.quizResultService.getResult(resultKey);
 
+      // Mise à jour de l'état pour afficher les résultats
       this.showQuestions = false;  // Cachez les questions
       this.showResults = true;     // Affichez les résultats
       this.animationState = 'enter'; // Déclenchez l'animation d'entrée pour les résultats
-    }, 500); // Assurez-vous que ce délai correspond à la durée de votre animation
+    }, 500); // La durée doit correspondre à celle de votre animation de sortie
   }
 
-  areAllQuestionsAnswered() {
-    return this.questionHistory.length === this.numberOfQuestions;
+
+  toggleDetails(activity: any) {
+    activity.showDetails = !activity.showDetails;
   }
 
   onAnimationDone() {
