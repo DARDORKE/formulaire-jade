@@ -108,7 +108,9 @@
   background-color: #d4300f;
 
   &:hover {
-    background-color: darken(#000000, 10%); // Assombrir la couleur au survol
+    background-color: transparent;
+    color: #d4300f;
+    border: 2px solid #d4300f;
   }
 }
 
