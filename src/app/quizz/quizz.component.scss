@@ -59,14 +59,33 @@
   margin-bottom: 15px;
   padding: 15px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in;
+  transition: transform 0.3s ease-in, border 2s ease-in-out;
   cursor: pointer;
-  border: 2px solid #d4300f;
+  border: 2px solid transparent;
+  border-left: 2px solid #d4300f; /* Seule la bordure gauche est visible initialement */
 
   &:hover {
     transform: scale(1.03);
   }
 }
+
+.result-item:hover, .result-item.active {
+  animation: borderAnimation 2s forwards; /* Utilise l'animation définie */
+}
+
+@keyframes borderAnimation {
+  0% {
+    border-top: 2px solid transparent;
+    border-right: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+  }
+  100% {
+    border-top: 2px solid #d4300f;
+    border-right: 2px solid #d4300f;
+    border-bottom: 2px solid #d4300f;
+  }
+}
+
 
 .result-title {
   display: flex;

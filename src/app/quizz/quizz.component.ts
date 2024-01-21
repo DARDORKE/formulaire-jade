@@ -122,16 +122,22 @@ export class QuizzComponent implements OnInit{
     this.activities.forEach((activity, i) => {
       if (activity !== activityToToggle) {
         activity.showDetails = false;
+        // Assurez-vous de réinitialiser la classe 'active' pour les autres éléments
+        this.activityElements.toArray()[i].nativeElement.classList.remove('active');
       }
     });
     activityToToggle.showDetails = !activityToToggle.showDetails;
 
     if (activityToToggle.showDetails) {
+      // Ajoutez la classe 'active' pour déclencher l'animation
+      this.activityElements.toArray()[index].nativeElement.classList.add('active');
+
       setTimeout(() => {
         this.activityElements.toArray()[index].nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 300); // Ajustez le délai si nécessaire
+      }, 300);
     }
   }
+
 
   onAnimationDone() {
     if (this.animationState === 'leave' && this.isCalculatingResult) {
