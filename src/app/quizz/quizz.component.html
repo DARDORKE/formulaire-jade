@@ -10,7 +10,7 @@
         <div class="question">{{ currentQuestion?.questionText }}</div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" style="padding-top: 15px !important">
       <div class="col-12 d-flex justify-content-around">
         <div class="flex flex-column gap-3">
           <div *ngFor="let option of currentQuestion?.options" class="field-checkbox pb-4 d-flex">
@@ -23,16 +23,22 @@
     </div>
     <div class="row">
       <div class="col-12 d-flex justify-content-around">
-        <p-button *ngIf="currentQuestionNumber > 1" (click)="goToPreviousQuestion()" label="Précédente"
-                  [disabled]="isAnimating" [text]="true" [plain]="true" icon="fa-solid fa-arrow-left"></p-button>
-        <p-button *ngIf="currentQuestionNumber < numberOfQuestions" (click)="onSelectOption()"
-                  [disabled]="!selectedOption || isAnimating" label="Suivante" [text]="true" [plain]="true"
-                  icon="fa-solid fa-arrow-right" iconPos="right"></p-button>
-        <p-button
+        <button
+          *ngIf="currentQuestionNumber > 1"
+          [disabled]="isAnimating"
+          (click)="goToPreviousQuestion()"
+          class="question-button"><i class="fa-solid fa-arrow-left"></i> Précédente
+        </button>
+        <button
+          *ngIf="currentQuestionNumber < numberOfQuestions"
+          [disabled]="!selectedOption || isAnimating"
+          (click)="onSelectOption()"
+          class="question-button">Suivante <i class="fa-solid fa-arrow-right"></i></button>
+        <button
           *ngIf="(currentQuestionNumber === numberOfQuestions) && (numberOfQuestions !== questionHistory.length)"
-          (click)="calculateFinalOutcome()" [disabled]="!selectedOption || isAnimating" label="Valider" [text]="true"
-          [plain]="true" icon="fa-solid fa-check" iconPos="right"></p-button>
-
+          [disabled]="!selectedOption || isAnimating"
+          (click)="calculateFinalOutcome()"
+          class="validate-button">Valider <i class="fa-solid fa-check"></i></button>
       </div>
     </div>
   </div>

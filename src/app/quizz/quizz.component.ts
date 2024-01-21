@@ -127,7 +127,6 @@ export class QuizzComponent implements OnInit{
     activityToToggle.showDetails = !activityToToggle.showDetails;
   }
 
-
   onAnimationDone() {
     if (this.animationState === 'leave' && this.isCalculatingResult) {
       this.showQuestions = false;

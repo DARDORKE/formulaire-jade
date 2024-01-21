@@ -54,14 +54,14 @@
 }
 
 .result-item {
-  background-color: #f8f8f8; // Couleur de fond secondaire
-  border-radius: 5px;
+  background-color: #ffffff; // Couleur de fond secondaire
+  border-radius: 15px;
   margin-bottom: 15px;
   padding: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in;
   cursor: pointer;
-  border-left: 3px solid #d4300f;
+  border: 2px solid #d4300f;
 
   &:hover {
     transform: scale(1.03);
@@ -78,10 +78,21 @@
   font-weight: 400;
   margin-bottom: 10px;
   color: #222c3d; // Couleur du texte
+  transition: font-size 0.5s ease, justify-content 0.5s ease, font-weight 0.5s ease; /* Ajoutez cette ligne */
 
   .fa {
     margin-left: 10px;
   }
+}
+
+.result-item.active .result-title {
+  font-size: 1.3em; /* Augmente la taille de la police */
+  justify-content: center; /* Centre le contenu */
+  font-weight: 500;
+}
+
+.result-item:hover .result-title {
+  font-weight: 500; /* Change la font-weight à 500 au survol de result-item */
 }
 
 .result-item img {
@@ -98,11 +109,11 @@
   font-style: italic;
 }
 
-.result-item a {
+.result-item a, .validate-button {
   padding: 8px 15px;
   color: white; // Couleur du texte
   border: none;
-  border-radius: 4px;
+  border-radius: 30px;
   text-decoration: none;
   font-size: 1em;
   cursor: pointer;
@@ -114,13 +125,19 @@
     color: #d4300f;
     border: 2px solid #d4300f;
   }
+
+  &:disabled {
+    background-color: #f2f2f2; /* Couleur de fond grise pour le bouton désactivé */
+    color: #cccccc; /* Couleur de texte grise pour le bouton désactivé */
+    border: 2px solid #cccccc; /* Couleur des contours gris pour le bouton désactivé */
+    cursor: not-allowed; /* Change le curseur pour indiquer que le bouton est désactivé */
+  }
 }
 
-.reset-button {
+.reset-button, .question-button {
   padding: 10px 20px;
-  margin-top: 30px;
   background-color: transparent;
-  border-radius: 5px;
+  border-radius: 30px;
   font-size: 1em;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -131,6 +148,21 @@
     background-color: #d4300f;
     color: white;
   }
+
+  &:disabled {
+    background-color: #f2f2f2; /* Couleur de fond grise pour le bouton désactivé */
+    color: #cccccc; /* Couleur de texte grise pour le bouton désactivé */
+    border: 2px solid #cccccc; /* Couleur des contours gris pour le bouton désactivé */
+    cursor: not-allowed; /* Change le curseur pour indiquer que le bouton est désactivé */
+  }
+}
+
+.question-button, .validate-button {
+  width: 10em;
+}
+
+.reset-button {
+  margin-top: 30px;
 }
 
 .question, .questionNumber, .answer, .result-title, .result-item p {
