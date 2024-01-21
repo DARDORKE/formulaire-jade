@@ -135,7 +135,7 @@ export class QuizzComponent implements OnInit{
       this.activityElements.toArray()[index].nativeElement.classList.remove('reverse-animation');
 
       setTimeout(() => {
-        this.activityElements.toArray()[index].nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        this.activityElements.toArray()[index].nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest', offsetTop: -5  });
       }, 300);
     } else {
       this.activityElements.toArray()[index].nativeElement.classList.add('reverse-animation');
