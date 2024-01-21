@@ -124,6 +124,7 @@ export class QuizzComponent implements OnInit{
         activity.showDetails = false;
         // Assurez-vous de réinitialiser la classe 'active' pour les autres éléments
         this.activityElements.toArray()[i].nativeElement.classList.remove('active');
+        this.activityElements.toArray()[i].nativeElement.classList.add('reverse-animation');
       }
     });
     activityToToggle.showDetails = !activityToToggle.showDetails;
@@ -131,10 +132,13 @@ export class QuizzComponent implements OnInit{
     if (activityToToggle.showDetails) {
       // Ajoutez la classe 'active' pour déclencher l'animation
       this.activityElements.toArray()[index].nativeElement.classList.add('active');
+      this.activityElements.toArray()[index].nativeElement.classList.remove('reverse-animation');
 
       setTimeout(() => {
         this.activityElements.toArray()[index].nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 300);
+    } else {
+      this.activityElements.toArray()[index].nativeElement.classList.add('reverse-animation');
     }
   }
 

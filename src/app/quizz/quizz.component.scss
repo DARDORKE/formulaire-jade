@@ -86,6 +86,22 @@
   }
 }
 
+.result-item.reverse-animation {
+  animation: borderAnimationReverse 2s forwards;
+}
+
+@keyframes borderAnimationReverse  {
+  0% {
+    border-top: 2px solid #d4300f;
+    border-right: 2px solid #d4300f;
+    border-bottom: 2px solid #d4300f;
+  }
+  100% {
+    border-top: 2px solid transparent;
+    border-right: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+  }
+}
 
 .result-title {
   display: flex;
