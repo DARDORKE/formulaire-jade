@@ -129,7 +129,7 @@ export class QuizzComponent implements OnInit{
     if (activityToToggle.showDetails) {
       setTimeout(() => {
         this.activityElements.toArray()[index].nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 500); // Ajustez le délai si nécessaire
+      }, 300); // Ajustez le délai si nécessaire
     }
   }
 

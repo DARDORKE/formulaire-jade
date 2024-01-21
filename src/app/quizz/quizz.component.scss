@@ -85,14 +85,12 @@
   }
 }
 
-.result-item.active .result-title {
-  font-size: 1.3em; /* Augmente la taille de la police */
-  justify-content: center; /* Centre le contenu */
+.result-item.active .result-title, .result-item:hover .result-title {
   font-weight: 500;
 }
 
-.result-item:hover .result-title {
-  font-weight: 500; /* Change la font-weight à 500 au survol de result-item */
+.result-item.active .result-title {
+  justify-content: center;
 }
 
 .result-item img {

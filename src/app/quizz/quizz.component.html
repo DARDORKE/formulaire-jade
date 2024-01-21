@@ -48,7 +48,9 @@
       <div (click)="toggleDetails(activity, i)" class="result-item" *ngFor="let activity of activities; let i = index"
            [class.active]="activity.showDetails" #activityElement>
         <div class="result-title">
-          {{ activity.title }}
+          <span class="title-content">
+            {{ activity.title }}
+          </span>
           <i class="fa" [class.fa-chevron-right]="!activity.showDetails"
              [class.fa-chevron-down]="activity.showDetails"></i>
         </div>
