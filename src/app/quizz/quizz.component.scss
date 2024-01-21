@@ -29,16 +29,20 @@
 }
 
 .results-container {
-  background-color: #ffffff; // Couleur de fond principale
-  padding: 20px;
-  border-radius: 20px;
-  max-width: 600px;
-  width: 100%;
-  margin: 0 auto;
+  width: 100vw;
   overflow-y: auto;
   position: relative;
   max-height: 95vh;
+}
+
+.results-content {
+  max-width: 800px;
+  margin: 0 auto;
   text-align: center;
+  padding: 20px;
+  border-radius: 20px;
+  box-sizing: border-box; // Inclut le padding dans la largeur
+  background-color: #ffffff; // Couleur de fond pour le contenu
 }
 
 .results-header {
