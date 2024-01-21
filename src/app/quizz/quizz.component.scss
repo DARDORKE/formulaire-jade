@@ -56,7 +56,7 @@
 .result-item {
   background-color: #ffffff; // Couleur de fond secondaire
   border-radius: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   padding: 15px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in, border 2s ease-in-out;
@@ -118,6 +118,10 @@
   .fa {
     margin-left: 10px;
   }
+}
+
+.result-item.active {
+  padding-bottom: 30px;
 }
 
 .result-item.active .result-title, .result-item:hover .result-title {
