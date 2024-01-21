@@ -45,8 +45,8 @@
   <div *ngIf="showResults" [@resultAnimation]="'enter'" class="results-container">
     <div class="results-content">
       <div class="results-header">Voici quelques idées d'activités qui pourraient vous intéresser :</div>
-      <div (click)="toggleDetails(activity)" class="result-item" *ngFor="let activity of activities"
-           [class.active]="activity.showDetails">
+      <div (click)="toggleDetails(activity, i)" class="result-item" *ngFor="let activity of activities; let i = index"
+           [class.active]="activity.showDetails" #activityElement>
         <div class="result-title">
           {{ activity.title }}
           <i class="fa" [class.fa-chevron-right]="!activity.showDetails"

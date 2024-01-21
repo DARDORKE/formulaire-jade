@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {QuizService} from "./Services/quiz.service";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {RadioButtonModule} from "primeng/radiobutton";
@@ -41,6 +41,7 @@ import {QuizResultService} from "./Services/quiz-result.service";
   ],
 })
 export class QuizzComponent implements OnInit{
+  @ViewChildren('activityElement') activityElements!: QueryList<ElementRef>;
   numberOfQuestions = 0;
   currentQuestionId = 1;
   currentQuestion: any;
@@ -117,14 +118,19 @@ export class QuizzComponent implements OnInit{
     }, 500); // La durée doit correspondre à celle de votre animation de sortie
   }
 
-
-  toggleDetails(activityToToggle: any) {
-    this.activities.forEach(activity => {
+  toggleDetails(activityToToggle: any, index: number) {
+    this.activities.forEach((activity, i) => {
       if (activity !== activityToToggle) {
         activity.showDetails = false;
       }
     });
     activityToToggle.showDetails = !activityToToggle.showDetails;
+
+    if (activityToToggle.showDetails) {
+      setTimeout(() => {
+        this.activityElements.toArray()[index].nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 500); // Ajustez le délai si nécessaire
+    }
   }
 
   onAnimationDone() {
