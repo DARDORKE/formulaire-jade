@@ -126,6 +126,7 @@
 
 .result-item.active .result-title {
   justify-content: center;
+  margin-bottom: 1.5em;
 }
 
 .result-item img {
@@ -137,7 +138,8 @@
 .result-item p {
   color: #222c3d; // Couleur du texte
   line-height: 1.6;
-  margin-top: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   font-weight: 100;
   font-style: italic;
 }
